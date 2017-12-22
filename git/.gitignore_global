@@ -1,7 +1,6 @@
 *~
 ._*
 .DS_Store
-.idea
 ## comment: "add & switch to VS Code as default editor"
 # .vscode
 node_modules

@@ -1,5 +1,5 @@
 ## Copy pwd to clipboard
-alias cpwd="pwd|tr -d '\n'|pbcopy"
+#alias cpwd="pwd|tr -d '\n'|pbcopy"
 
 
 ## Shortcuts
@@ -7,13 +7,12 @@ alias gg="$DOTFILES_GIT_GUI"
 
 alias cask="brew cask"
 
-alias chrome="open -a ~/Applications/Google\ Chrome.app"
-alias canary="open -a ~/Applications/Google\ Chrome\ Canary.app"
+alias chrome="open -a ~/Applications/Safari.app"
 alias firefox="open -a ~/Applications/Firefox.app"
 
 
 ## Exclude macOS specific files in ZIP archives
-alias zip="zip -x *.DS_Store -x *__MACOSX* -x *.AppleDouble*"
+#alias zip="zip -x *.DS_Store -x *__MACOSX* -x *.AppleDouble*"
 
 
 ## Open iOS Simulator
@@ -33,21 +32,21 @@ alias logoff="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resou
 
 
 ## Quick-Look preview files from the command line
-alias ql="qlmanage -p &>/dev/null"
+#alias ql="qlmanage -p &>/dev/null"
 
 
 ## Show/hide desktop icons
-alias desktopshow="defaults write com.apple.finder CreateDesktop -bool true && killfinder"
-alias desktophide="defaults write com.apple.finder CreateDesktop -bool false && killfinder"
+#alias desktopshow="defaults write com.apple.finder CreateDesktop -bool true && killfinder"
+#alias desktophide="defaults write com.apple.finder CreateDesktop -bool false && killfinder"
 
 
 ## Recursively remove Apple meta files
-alias cleanupds="find . -type f -name '*.DS_Store' -ls -exec /bin/rm {} \;"
-alias cleanupad="find . -type d -name '.AppleD*' -ls -exec /bin/rm -r {} \;"
+#alias cleanupds="find . -type f -name '*.DS_Store' -ls -exec /bin/rm {} \;"
+#alias cleanupad="find . -type d -name '.AppleD*' -ls -exec /bin/rm -r {} \;"
 
 
 ## Clean up LaunchServices to remove duplicates in the "Open With" menu
-alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+#alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
 
 ## Empty trash on mounted volumes and main HDD, and clear system logs
@@ -62,4 +61,4 @@ alias killos="killfinder && killdock && killmenubar"
 
 
 ## Kill all the tabs in Chrome to free up memory
-alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+#alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"

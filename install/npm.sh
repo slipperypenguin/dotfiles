@@ -15,17 +15,19 @@ nvm alias default 8
 
 ## Globally install with npm
 packages=(
-  get-port-cli
-  gtop
-  historie
-  nodemon
+  cost-of-modules
+  #get-port-cli
+  #historie
+  #nodemon
   npm
-  release-it
-  spot
-  superstatic
-  svgo
+  npm-check
+  #release-it
+  #spot
+  #superstatic
+  #svgo
   tldr
-  underscore-cli
+  #underscore-cli
+  vtop
 )
 
 npm install -g "${packages[@]}"

@@ -1,19 +1,5 @@
 # dotfiles
-Dotfiles for macOS
-These are my dotfiles. Take anything you want, but at your own risk.
-
-It targets macOS systems, but it should work on nix as well (tested on a few Linux boxes and Ubuntu 16).
-
-## Extra Tooling Used
-
-### [Mackup](https://github.com/lra/mackup)
-Keep your application settings in sync (OS X/Linux)
-
-
-## To-do
-- uninstall grep
-- check if ruby is needed for TravisCI
-
+These are my dotfiles for macOS. It is still a work in progress.
 
 ## Package overview
 * Core
@@ -86,9 +72,7 @@ Alternatively, you can have an additional, personal dotfiles repo at `~/.extra`.
 * [homebrew-cask](https://caskroom.github.io) / [usage](https://github.com/phinze/homebrew-cask/blob/master/USAGE.md)
 * [Bash prompt](https://wiki.archlinux.org/index.php/Color_Bash_Prompt)
 * [Solarized Color Theme for GNU ls](https://github.com/seebi/dircolors-solarized)
-* [Setup Guide](https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789)
-* [Repo Used](https://github.com/webpro/dotfiles)
 
 
 ## Credits
-Many thanks to the [dotfiles community](https://dotfiles.github.io).
+Many thanks to the [dotfiles community](https://dotfiles.github.io) and [webpro](https://github.com/webpro/dotfiles) for the [guide](https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789)

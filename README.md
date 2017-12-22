@@ -1,4 +1,7 @@
 # dotfiles
+![dotfiles](https://i.imgur.com/wKDfQxw.png)
+
+
 These are my dotfiles for macOS. It is still a work in progress.
 
 ## Package overview

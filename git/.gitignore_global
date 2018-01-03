@@ -1,8 +1,8 @@
+### DONE
 *~
 ._*
 .DS_Store
-## comment: "add & switch to VS Code as default editor"
-# .vscode
+# .atom
 node_modules
 bower_components
 npm-debug.log

@@ -10,5 +10,8 @@ brew install gpg2
 rvm install 2.3
 rvm use 2.3 --default
 
+gem update
+
 #gem install lunchy
 #gem install pygmentize
+gem install travis

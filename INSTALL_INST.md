@@ -16,7 +16,7 @@ You may want to have an installation script to automate symlinking the dotfiles 
 
 To install the dotfiles on a new system, we can do so easily by cloning the repo:
 ```bash
-git clone https://github.com/webpro/dotfiles.git
+git clone https://github.com/slipperypenguin/dotfiles.git
 cd dotfiles
 ```
-Then do the symlinking (either manually or with a script), et voilà! Now I would like to show you some more neat things you can do in your dotfiles.
+Then do the symlinking (either manually or with a script), et voilà!

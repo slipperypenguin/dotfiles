@@ -5,7 +5,6 @@ fi
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-#brew tap Goles/battery
 brew update
 brew upgrade
 
@@ -13,13 +12,12 @@ brew upgrade
 ## Install packages
 apps=(
   #bash-completion2
-  #bats
-  #battery
-  #coreutils
+  bats
+  coreutils
   cf-cli
   curl
   #diff-so-fancy
-  #dockutil
+  dockutil
   exercism
   #ffmpeg
   #fasd
@@ -27,12 +25,11 @@ apps=(
   #gifsicle
   git
   #git-extras
-  #gnu-sed --with-default-names
-  #grep --with-default-names
+  gnu-sed --with-default-names
+  grep --with-default-names
   #hub
   httpie
   icu4c
-  #imagemagick
   jq
   libyaml
   #lynx

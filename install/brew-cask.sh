@@ -3,21 +3,21 @@ if ! is-macos -o ! is-executable brew; then
   return
 fi
 
-brew tap caskroom/cask
-brew tap caskroom/fonts
+#brew tap caskroom/cask
+#brew tap caskroom/fonts
 
 ## Install packages
-apps=(
-  alfred
-  dash3
-  firefox
-  firefoxdeveloper
-  glimmerblocker
-  macdown
-  atom
-)
+#apps=(
+#  alfred
+#  dash3
+#  firefox
+#  firefoxdeveloper
+#  glimmerblocker
+#  macdown
+#  atom
+#)
 
-brew cask install "${apps[@]}"
+#brew cask install "${apps[@]}"
 
 
 ## Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)

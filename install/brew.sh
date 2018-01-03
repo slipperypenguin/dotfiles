@@ -5,7 +5,7 @@ fi
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew tap Goles/battery
+#brew tap Goles/battery
 brew update
 brew upgrade
 
@@ -13,7 +13,7 @@ brew upgrade
 ## Install packages
 apps=(
   #bash-completion2
-  bats
+  #bats
   #battery
   #coreutils
   cf-cli
@@ -23,6 +23,7 @@ apps=(
   exercism
   #ffmpeg
   #fasd
+  gdbm
   #gifsicle
   git
   #git-extras
@@ -30,23 +31,27 @@ apps=(
   #grep --with-default-names
   #hub
   httpie
+  icu4c
   #imagemagick
   jq
-  #libyaml
+  libyaml
   #lynx
   mackup
+  mongodb
   #nano
   node
-  #oniguruma
+  oniguruma
   openssl
-  #pcre
   #pandoc
+  pcre
   #peco
+  pkg-config
   #psgrep
   python
-  #readline
+  readline
   ruby
   #shellcheck
+  sqlite
   #ssh-copy-id
   #tree
   #unar

@@ -15,17 +15,27 @@ nvm alias default 8
 
 ## Globally install with npm
 packages=(
+  @storybook/cli
   cost-of-modules
+  create-react-app
+  eslint
   #get-port-cli
   #historie
+  jasmine
+  jest
+  nativefier
   #nodemon
   npm
   npm-check
+  npm-collect
+  react-devtools
   #release-it
   #spot
   #superstatic
   #svgo
+  swagger
   tldr
+  tree-cli
   #underscore-cli
   vtop
 )

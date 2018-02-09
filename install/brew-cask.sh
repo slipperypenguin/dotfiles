@@ -4,7 +4,7 @@ if ! is-macos -o ! is-executable brew; then
 fi
 
 brew tap caskroom/cask
-#brew tap caskroom/fonts
+brew tap caskroom/fonts
 
 ## Install packages
 apps=(
@@ -18,6 +18,8 @@ apps=(
    duet
    evernote
    firefox
+   font-ibm-plex
+   font-source-code-pro
    github
    kap
    muzzle

@@ -4,5 +4,3 @@
 .DS_Store
 # .atom
 node_modules
-bower_components
-npm-debug.log

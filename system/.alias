@@ -34,6 +34,11 @@ alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'"
 alias paths='echo -e ${PATH//:/\\n}'
 
 
+## Makes reading directory listings easier
+## -G: colorize output, -h: sizes human readable, -F: throws a / after a directory, * after an executable, and a @ after a symlink
+alias ls='ls -GFh'
+
+
 ## Directory listing/traversal
 #LS_COLORS=`is-supported "ls --color" --color -G`
 #LS_TIMESTYLEISO=`is-supported "ls --time-style=long-iso" --time-style=long-iso`

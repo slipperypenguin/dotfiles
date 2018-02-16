@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-OPT_COLOR=""
+OPT_COLOR="jq"
 
 while getopts ":c" OPT; do
 	case "$OPT" in
@@ -20,4 +20,5 @@ else
   INPUT=$(cat -)
 fi
 
-echo "$INPUT" | underscore print "$OPT_COLOR"
+## echo "$INPUT" | underscore print "$OPT_COLOR"
+echo "$INPUT" | "$OPT_COLOR"

@@ -4,7 +4,7 @@
 export DOTFILES_DIR DOTFILES_CACHE DOTFILES_EXTRA_DIR
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DOTFILES_CACHE="$DOTFILES_DIR/.cache.sh"
-DOTFILES_EXTRA_DIR="$HOME/.extra"
+DOTFILES_EXTRA_DIR="$HOME/.extra" #currently no extras
 
 
 ## Make utilities available
@@ -17,8 +17,8 @@ if is-executable git -a -d "$DOTFILES_DIR/.git"; then git --work-tree="$DOTFILES
 
 ## Bunch of symlinks
 ln -sfv "$DOTFILES_DIR/runcom/.bash_profile" ~
-ln -sfv "$DOTFILES_DIR/runcom/.inputrc" ~
-ln -sfv "$DOTFILES_DIR/runcom/.gemrc" ~
+# ln -sfv "$DOTFILES_DIR/runcom/.inputrc" ~
+# ln -sfv "$DOTFILES_DIR/runcom/.gemrc" ~
 ln -sfv "$DOTFILES_DIR/git/.gitconfig" ~
 ln -sfv "$DOTFILES_DIR/git/.gitignore_global" ~
 

@@ -11,47 +11,37 @@ brew upgrade
 
 ## Install packages
 apps=(
-  #bash-completion2
+  bash-completion2
   bats
   coreutils
-  cf-cli
+  couchdb
   curl
-  #diff-so-fancy
   dockutil
   exercism
-  #ffmpeg
-  #fasd
   gdbm
-  #gifsicle
   git
   #git-extras
   gnu-sed --with-default-names
   grep --with-default-names
-  #hub
   httpie
   icu4c
   jq
   libyaml
-  #lynx
   mackup
   mongodb
   #nano
   node
   oniguruma
   openssl
-  #pandoc
+  osquery
   pcre
-  #peco
   pkg-config
-  #psgrep
   python
+  python3
   readline
   ruby
-  #shellcheck
   sqlite
-  #ssh-copy-id
   #tree
-  #unar
   watchman
   wget
   #wifi-password

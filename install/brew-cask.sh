@@ -3,12 +3,12 @@ if ! is-macos -o ! is-executable brew; then
   return
 fi
 
+brew tap caskroom/versions
 brew tap caskroom/cask
 brew tap caskroom/fonts
 
 ## Install packages
 apps=(
-#  alfred
    archiver
    atom
    bartender
@@ -22,9 +22,9 @@ apps=(
    font-source-code-pro
    github
    kap
-   muzzle
    paw
-   rocket
+   pocket
+   #scratches
    sequel-pro
    sip
    sketch
@@ -40,4 +40,4 @@ brew cask install "${apps[@]}"
 
 
 ## Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
-#brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
+#brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package qlvideo

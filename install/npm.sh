@@ -24,12 +24,10 @@ packages=(
   jasmine
   jest
   nativefier
-  #nodemon
   npm
   npm-check
   npm-collect
   react-devtools
-  #release-it
   #spot
   #superstatic
   #svgo

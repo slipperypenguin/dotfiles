@@ -14,11 +14,11 @@ This is my dotfiles setup for macOS. It is still a work in progress.
   * Git + ~~[SourceTree](https://www.sourcetreeapp.com)~~ + ~~[hub](https://hub.github.com)~~
   * ~~[unar](https://theunarchiver.com/command-line)~~
   * [rvm](https://rvm.io) (Ruby 2.1), ~~[lunchy](https://github.com/eddiezane/lunchy)~~
-  * Python 2
+  * Python 2 & Python 3
   * `$EDITOR` and Git editor is [atom](https://atom.io)
 * Development (Node/JS/JSON): [jq](https://stedolan.github.io/jq), ~~[nodemon](https://nodemon.io), [peco](https://peco.github.io)~~, ~~[superstatic](https://github.com/firebase/superstatic)~~, ~~[underscore-cli](https://github.com/ddopson/underscore-cli)~~
 * macOS: [dockutil](https://github.com/kcrawford/dockutil), ~~[Hammerspoon](https://www.hammerspoon.org)~~, [Mackup](https://github.com/lra/mackup), ~~[Quick Look plugins](https://github.com/sindresorhus/quick-look-plugins)~~
-* [macOS apps](https://github.com/webpro/dotfiles/blob/master/install/brew-cask.sh)
+* [macOS apps](https://github.com/slipperypenguin/dotfiles/blob/master/install/brew-cask.sh)
 
 
 ## Install

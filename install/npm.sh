@@ -17,13 +17,16 @@ nvm alias default 8
 packages=(
   @storybook/cli
   cost-of-modules
+  create-next-app
   create-react-app
   eslint
+  fast-cli
   #get-port-cli
   #historie
   jasmine
   jest
   nativefier
+  now
   npm
   npm-check
   npm-collect

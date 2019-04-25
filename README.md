@@ -6,46 +6,39 @@ This is my dotfiles setup for macOS. It is still a work in progress.
 
 ## Package overview
 * Core
-  * Bash + [coreutils](https://en.wikipedia.org/wiki/GNU_Core_Utilities) + ~~bash-completion~~
-  * [Homebrew](https://brew.sh) + ~~[homebrew-cask](https://caskroom.github.io)~~
-  * Node.js + npm
+  * Bash
+  * [Homebrew](https://brew.sh) + [homebrew-cask](https://caskroom.github.io)
+  * Node.js + npm LTS
   * GNU [sed](https://www.gnu.org/software/sed/), [grep](https://www.gnu.org/software/grep/), [Wget](https://www.gnu.org/software/wget/)
-  * ~~[fasd](https://github.com/clvv/fasd)~~, ~~[psgrep](https://github.com/jvz/psgrep/blob/master/psgrep)~~, ~~[pgrep](https://linux.die.net/man/1/pgrep)~~, ~~[spot](https://github.com/guille/spot)~~, ~~[tree](http://mama.indstate.edu/users/ice/tree/)~~, ~~[gtop](https://github.com/aksakalli/gtop)~~
-  * Git + ~~[SourceTree](https://www.sourcetreeapp.com)~~ + ~~[hub](https://hub.github.com)~~
-  * ~~[unar](https://theunarchiver.com/command-line)~~
-  * [rvm](https://rvm.io) (Ruby 2.1), ~~[lunchy](https://github.com/eddiezane/lunchy)~~
-  * Python 2 & Python 3
-  * `$EDITOR` and Git editor is [atom](https://atom.io)
-* Development (Node/JS/JSON): [jq](https://stedolan.github.io/jq), ~~[nodemon](https://nodemon.io), [peco](https://peco.github.io)~~, ~~[superstatic](https://github.com/firebase/superstatic)~~, ~~[underscore-cli](https://github.com/ddopson/underscore-cli)~~
-* macOS: [dockutil](https://github.com/kcrawford/dockutil), ~~[Hammerspoon](https://www.hammerspoon.org)~~, [Mackup](https://github.com/lra/mackup), ~~[Quick Look plugins](https://github.com/sindresorhus/quick-look-plugins)~~
+  * Latest Git, Python 3, GNU coreutils, curl
+  * `$EDITOR` is [atom](https://atom.io)
+  * Git editor is [nano](https://www.nano-editor.org)
+* Development (Node/JS/JSON): [jq](https://stedolan.github.io/jq),
+* macOS: [dockutil](https://github.com/kcrawford/dockutil), [Mackup](https://github.com/lra/mackup), [Quick Look plugins](https://github.com/sindresorhus/quick-look-plugins)
 * [macOS apps](https://github.com/slipperypenguin/dotfiles/blob/master/install/brew-cask.sh)
 
 
 ## Install
 On a sparkling fresh installation of macOS:
-
+```bash
     sudo softwareupdate -i -a
     xcode-select --install
+```
 
-Install the dotfiles with either Git or curl:
+The Xcode Command Line Tools includes git and make (not available on stock macOS). Then, install this repo with `curl` available:
+```bash
+bash -c "`curl -fsSL https://raw.githubusercontent.com/slipperypenguin/dotfiles/master/remote-install.sh`"
+```
 
+This will clone (using `git`), or download (using `curl` or `wget`), this repo to ``~/.dotfiles`. Alternatively, clone manually into the desired location:
 
-### Clone with Git
-    git clone https://github.com/slipperypenguin/dotfiles.git ~/.dotfiles
-    source ~/.dotfiles/install.sh
-
-
-### Remotely install using curl
-Alternatively, you can install this into `~/.dotfiles` remotely without Git using curl:
-
-    bash -c "`curl -fsSL https://raw.github.com/slipperypenguin/dotfiles/master/remote-install.sh`"
-
-Or, using wget:
-
-    bash -c "`wget -O - --no-check-certificate https://raw.githubusercontent.com/slipperypenguin/dotfiles/master/remote-install.sh`"
-
+```bash
+git clone https://github.com/slipperypenguin/dotfiles.git ~/.dotfiles
+source ~/.dotfiles/install.sh
+```
 
 ## The `dotfiles` command
+```bash
     $ dotfiles help
     Usage: dotfiles <command>
 
@@ -57,7 +50,7 @@ Or, using wget:
        macos            Apply macOS system defaults
        test             Run tests
        update           Update packages and pkg managers (OS, brew, npm, gem)
-
+```
 
 ## Customize/extend
 You can put your custom settings, such as Git credentials in the `system/.custom` file which will be sourced from `.bash_profile` automatically. This file is in `.gitignore`.

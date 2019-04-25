@@ -1,6 +1,6 @@
-### DONE
 *~
 ._*
 .DS_Store
-# .atom
 node_modules
+.idea
+npm-debug.log

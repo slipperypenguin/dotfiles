@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-OPT_COLOR="jq"
+OPT_COLOR=""
 
 while getopts ":c" OPT; do
 	case "$OPT" in

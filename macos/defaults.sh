@@ -5,7 +5,7 @@
 ## Ask for the administrator password upfront
 sudo -v
 
-## Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+# Keep-alive: update existing `sudo` time stamp until this script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 ##############################################################################
@@ -30,10 +30,7 @@ sudo systemsetup -setrestartfreeze on
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
 ## Automatically illuminate built-in MacBook keyboard in low light
-defaults write com.apple.BezelServices kDim -bool true
-
-## Set the timezone; see `sudo systemsetup -listtimezones` for other values
-#sudo systemsetup -settimezone "America/New_York" > /dev/null
+#defaults write com.apple.BezelServices kDim -bool true
 
 
 ##############################################################################
@@ -134,8 +131,8 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 #defaults write com.apple.terminal StringEncodings -array 4
 
 ## Use "Monokai Pro (Filter Spectrum)" theme
-defaults write com.apple.terminal "Default Window Settings" -string "Monokai Pro (Filter Spectrum)"
-defaults write com.apple.terminal "Startup Window Settings" -string "Monokai Pro (Filter Spectrum)"
+#defaults write com.apple.terminal "Default Window Settings" -string "Monokai Pro (Filter Spectrum)"
+#defaults write com.apple.terminal "Startup Window Settings" -string "Monokai Pro (Filter Spectrum)"
 
 ## Disable the annoying line marks
 #defaults write com.apple.Terminal ShowLineMarks -int 0
@@ -157,3 +154,12 @@ defaults write com.apple.ActivityMonitor IconType -int 5
 ## Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+
+###############################################################################
+# Kill affected applications                                                  #
+###############################################################################
+
+for app in "Address Book" "Calendar" "Contacts" "Dock" "Finder" "Mail" "Safari" "SystemUIServer" "iCal"; do
+  killall "${app}" &> /dev/null
+done

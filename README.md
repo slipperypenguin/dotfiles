@@ -2,21 +2,19 @@
 ![dotfiles](https://i.imgur.com/wKDfQxw.png)
 
 
-This is my dotfiles setup for macOS. It is still a work in progress.
+These are my dotfiles. It is setup for macOS and Linux
 
 ## Package overview
-* Core
-  * Bash
-  * [Homebrew](https://brew.sh) + [homebrew-cask](https://caskroom.github.io)
-  * Node.js + npm LTS
-  * GNU [sed](https://www.gnu.org/software/sed/), [grep](https://www.gnu.org/software/grep/), [Wget](https://www.gnu.org/software/wget/)
-  * Latest Git, Python 3, GNU coreutils, curl
-  * `$EDITOR` is [atom](https://atom.io)
-  * Git editor is [nano](https://www.nano-editor.org)
-* Development (Node/JS/JSON): [jq](https://stedolan.github.io/jq),
-* macOS: [dockutil](https://github.com/kcrawford/dockutil), [Mackup](https://github.com/lra/mackup), [Quick Look plugins](https://github.com/sindresorhus/quick-look-plugins)
-* [macOS apps](https://github.com/slipperypenguin/dotfiles/blob/master/install/brew-cask.sh)
-
+* Bash
+* [Homebrew](https://brew.sh) (packages: [Brewfile](./install/Brewfile))
+* [homebrew-cask](https://caskroom.github.io) (packages: [Caskfile](./install/Caskfile))
+* Node.js + npm LTS (packages: [npmfile](./install/npmfile))
+* Latest Ruby (packages: [Gemfile](./install/Gemfile))
+* Latest Git, Bash 4, Python 3, GNU coreutils, curl
+* [Mackup](https://github.com/lra/mackup) (sync application settings)
+* `$EDITOR` (and Git editor) is [GNU nano](https://www.nano-editor.org)
+* IDE is [atom](https://atom.io)
+* Development (Go/Kubernetes/Node/JS)
 
 ## Install
 On a sparkling fresh installation of macOS:
@@ -34,8 +32,25 @@ This will clone (using `git`), or download (using `curl` or `wget`), this repo t
 
 ```bash
 git clone https://github.com/slipperypenguin/dotfiles.git ~/.dotfiles
-source ~/.dotfiles/install.sh
 ```
+
+Use the [Makefile](./Makefile) to install everything [listed above](#package-overview), and symlink [runcom](./runcom) and [config](./config) (using [stow](https://www.gnu.org/software/stow/)):
+
+```bash
+$ cd ~/.dotfiles
+$ make
+```
+
+
+## Post-install
+- `dotfiles dock` (set [Dock items](./macos/dock.sh))
+- `dotfiles macos` (set [macOS defaults](./macos/defaults.sh))
+- Mackup
+  - Log in to iCloud (and wait until synced)
+  - `ln -s ~/.config/mackup/.mackup.cfg ~` (until [#632](https://github.com/lra/mackup/pull/632) is fixed)
+  - `mackup restore`
+
+
 
 ## The `dotfiles` command
 ```bash
@@ -43,9 +58,9 @@ source ~/.dotfiles/install.sh
     Usage: dotfiles <command>
 
     Commands:
-       clean            Clean up caches (brew, npm, gem, rvm)
+       clean            Clean up caches (brew, npm, gem)
        dock             Apply macOS Dock settings
-       edit             Open dotfiles in IDE (code) and Git GUI (stree)
+       edit             Open dotfiles in IDE (atom) and Git GUI (nano)
        help             This help message
        macos            Apply macOS system defaults
        test             Run tests
@@ -55,10 +70,8 @@ source ~/.dotfiles/install.sh
 ## Customize/extend
 You can put your custom settings, such as Git credentials in the `system/.custom` file which will be sourced from `.bash_profile` automatically. This file is in `.gitignore`.
 
-Alternatively, you can have an additional, personal dotfiles repo at `~/.extra`.
+Alternatively, you can have an additional, personal dotfiles repo at `~/.extra`. The runcom `.bash_profile` sources all `~/.extra/runcom/*.sh` files.
 
-* The runcom `.bash_profile` sources all `~/.extra/runcom/*.sh` files.
-* The installer (`install.sh`) will run `~/.extra/install.sh`.
 
 
 ## Additional resources
@@ -66,7 +79,7 @@ Alternatively, you can have an additional, personal dotfiles repo at `~/.extra`.
 * [Homebrew](https://brew.sh)
 * [homebrew-cask](https://caskroom.github.io) / [usage](https://github.com/phinze/homebrew-cask/blob/master/USAGE.md)
 * [Bash prompt](https://wiki.archlinux.org/index.php/Color_Bash_Prompt)
-* [Solarized Color Theme for GNU ls](https://github.com/seebi/dircolors-solarized)
+
 
 
 ## Credits

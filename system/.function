@@ -1,4 +1,3 @@
-### DONE
 # Commands that are too complex for an alias
 #   (and perhaps too small for a stand-alone script)
 # They can be defined in a function.
@@ -43,21 +42,3 @@ prepend-path() {
 calc() {
   echo "$*" | bc -l;
 }
-
-
-## Weather
-#meteo() {
-#  local LOCALE=`echo ${LANG:-en} | cut -c1-2`
-#  if [ $# -eq 0 ]; then
-#    local LOCATION=`curl -s ipinfo.io/loc`
-#  else
-#    local LOCATION=$1
-#  fi
-#  curl -s "$LOCALE.wttr.in/$LOCATION"
-#}
-
-
-## Markdown
-#md() {
-#  pandoc $1 | lynx -stdin -dump
-#}

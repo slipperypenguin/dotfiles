@@ -1,8 +1,3 @@
-### DONE
-# Aliases allow you to define shortcuts for commands,
-#  to add default arguments, and/or to abbreviate longer one-liners.
-
-
 
 ## Shortcuts
 alias reload="source ~/.bash_profile"
@@ -15,8 +10,6 @@ alias reload="source ~/.bash_profile"
 #alias rsync="rsync -vh"
 #alias json="json -c"
 #alias psgrep="psgrep -i"
-
-#is-executable hub && eval "$(hub alias -s)" # alias git=hub
 
 
 ## Global aliases
@@ -90,7 +83,6 @@ alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
 
 ## Miscellaneous
 #alias hosts="sudo $EDITOR /etc/hosts"
-#alias his="historie"
 alias quit="exit"
 #alias week="date +%V"
 #alias speedtest="wget -O /dev/null http://speed.transip.nl/100mb.bin"

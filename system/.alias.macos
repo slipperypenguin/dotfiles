@@ -1,4 +1,3 @@
-### DONE
 ## Copy pwd to clipboard
 #alias cpwd="pwd|tr -d '\n'|pbcopy"
 
@@ -9,7 +8,7 @@ alias gg="$DOTFILES_GIT_GUI"
 #alias cask="brew cask"
 
 alias safari="open -a ~/Applications/Safari.app"
-alias firefox="open -a ~/Applications/Firefox.app"
+#alias firefox="open -a ~/Applications/Firefox.app"
 
 
 ## Exclude macOS specific files in ZIP archives
@@ -33,7 +32,7 @@ alias logoff="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resou
 
 
 ## Quick-Look preview files from the command line
-#alias ql="qlmanage -p &>/dev/null"
+alias ql="qlmanage -p &>/dev/null"
 
 
 ## Show/hide desktop icons

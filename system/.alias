@@ -33,7 +33,7 @@ alias ls='ls -GFh'
 
 
 ## Directory listing/traversal
-#LS_COLORS=`is-supported "ls --color" --color -G`
+LS_COLORS=`is-supported "ls --color" --color -G`
 #LS_TIMESTYLEISO=`is-supported "ls --time-style=long-iso" --time-style=long-iso`
 #LS_GROUPDIRSFIRST=`is-supported "ls --group-directories-first" --group-directories-first`
 
@@ -44,6 +44,8 @@ alias ls='ls -GFh'
 #alias lpm="stat -c '%a %n' *"
 
 #unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
+unset LS_COLORS
+
 
 #alias ..="cd .."
 #alias ...="cd ../.."

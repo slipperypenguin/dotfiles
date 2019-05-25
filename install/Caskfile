@@ -4,7 +4,6 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 
 
-cask "archiver"
 cask "atom"
 cask "balenaetcher"
 cask "bartender"
@@ -25,17 +24,20 @@ cask "kitematic"
 cask "minikube"
 cask "mojibar"
 cask "paw"
-cask "pocket"
 cask "qlstephen"
 cask "quicklook-json"
 cask "sequel-pro"
 # cask "sketch"
 # cask "slack"
 cask "tableplus"
-cask "trym"
 cask "tyke"
 cask "virtualbox"
 cask "wireshark"
+
+
+## Need to resolve
+# cask "archiver"
+
 
 
 ## WorkBook

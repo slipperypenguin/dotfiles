@@ -54,7 +54,7 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 
 ## Makes reading directory listings easier
 ## -G: colorize output, -h: sizes human readable, -F: throws a / after a directory, * after an executable, and a @ after a symlink
-alias ls='ls -GFh'
+alias ls='ls -GFh --color'
 
 ## Set LSCOLORS
 eval "$(dircolors -b "$DOTFILES_DIR"/system/.dir_colors)"

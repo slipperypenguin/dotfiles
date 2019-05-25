@@ -10,7 +10,7 @@
 
 
 ## Immediately add a trailing slash when autocompleting symlinks to directories
-set mark-symlinked-directories on
+#set mark-symlinked-directories on
 
 
 ## Show all autocomplete results at once

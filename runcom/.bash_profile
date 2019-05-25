@@ -38,8 +38,27 @@ if is-macos; then
 fi
 
 
+##
+### Colors
+##
+## Change bash prompt to be colorized, rearranges prompt to be: "@username:cwd $ "
+export PS1="@\[\033[36m\]\u\[\033[m\]:\[\033[33;1m\]\w\[\033[m\]\$ "
+
+## Add k8s helper to PS1
+## "@username:cwd$ (kube-ps1) "
+PS1=$PS1'$(kube_ps1) '
+
+## Enable command line colors, define colors for the 'ls' command
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+## Makes reading directory listings easier
+## -G: colorize output, -h: sizes human readable, -F: throws a / after a directory, * after an executable, and a @ after a symlink
+alias ls='ls -GFh'
+
 ## Set LSCOLORS
-eval "$(dircolors -b "$DOTFILES_DIR"/system/.dir_colors)"
+#eval "$(dircolors -b "$DOTFILES_DIR"/system/.dir_colors)"
+
 
 
 ## Hook for extra/custom stuff

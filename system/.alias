@@ -44,7 +44,7 @@ LS_COLORS=`is-supported "ls --color" --color -G`
 #alias lpm="stat -c '%a %n' *"
 
 #unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
-unset LS_COLORS
+#unset LS_COLORS
 
 
 #alias ..="cd .."

@@ -1,0 +1,29 @@
+[user]
+	name = {{ .git_name | quote }}
+	email = {{ .email | quote }}
+	signingkey = {{ .git_signing_key }}
+[core]
+	editor = nano
+	pager = delta
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[url "git@github.ibm.com:"]
+	insteadOf = https://github.ibm.com/
+
+[merge "icdflow-baseline-merge"]
+    	name = A custom merge driver to handle baseline updates
+    	driver = icdflow baseline-merge %O %A %B || git merge-file -L "ours" -L "ancestor" -L "incoming" --marker-size=%L %A %O %B
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	side-by-side = true
+	line-numbers = true
+	line-numbers-left-style = cyan
+	line-numbers-right-style = cyan
+	line-numbers-zero-style = dim syntax

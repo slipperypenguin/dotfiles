@@ -11,13 +11,6 @@
 	process = git-lfs filter-process
 	required = true
 
-[url "git@github.ibm.com:"]
-	insteadOf = https://github.ibm.com/
-
-[merge "icdflow-baseline-merge"]
-    	name = A custom merge driver to handle baseline updates
-    	driver = icdflow baseline-merge %O %A %B || git merge-file -L "ours" -L "ancestor" -L "incoming" --marker-size=%L %A %O %B
-
 [interactive]
 	diffFilter = delta --color-only
 
@@ -27,3 +20,13 @@
 	line-numbers-left-style = cyan
 	line-numbers-right-style = cyan
 	line-numbers-zero-style = dim syntax
+
+{{- if eq .chezmoi.hostname "WorkBook" }}
+# this will only be included in ~/.gitconfig on work-laptop
+[url "git@github.ibm.com:"]
+	insteadOf = https://github.ibm.com/
+
+[merge "icdflow-baseline-merge"]
+		name = A custom merge driver to handle baseline updates
+		driver = icdflow baseline-merge %O %A %B || git merge-file -L "ours" -L "ancestor" -L "incoming" --marker-size=%L %A %O %B
+{{- end }}

@@ -1,0 +1,222 @@
+##
+###   Homebrew env config
+##
+## Apple Silicon
+if [[ $(uname -m) == 'arm64' ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+
+##
+###   NVM configuration
+##
+## added by nvm installer
+export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+## Apple Silicon
+# This loads nvm
+[ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"
+# This loads nvm bash_completion
+[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
+
+
+
+## Make Python 3.11 system default
+# this is needed when using 3.12 on the system.
+export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
+# https://github.com/asdf-vm/asdf/issues/894
+alias brew="env PATH=\"\${PATH//.asdf/shims:/}\" brew"
+##
+###   Python virtualenvwrapper
+##
+## from http://friendly-101.readthedocs.io/en/latest/pipvirtualenv.html
+export WORKON_HOME="$HOME/.virtualenvs"
+## Intel Mac
+if [[ $(uname -m) == 'x86_64' ]]; then
+  export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+  export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
+## Apple Silicon
+if [[ $(uname -m) == 'arm64' ]]; then
+  #export VIRTUALENVWRAPPER_PYTHON=/opt/homebrew/bin/python3
+  export VIRTUALENVWRAPPER_PYTHON=$(which python3)
+  export VIRTUALENVWRAPPER_VIRTUALENV=/opt/homebrew/bin/virtualenv
+  source /opt/homebrew/bin/virtualenvwrapper.sh
+fi
+
+
+##
+###   Go lang Settings
+##
+export GOPATH="${HOME}/.go"
+export GOROOT="$(brew --prefix go)/libexec"
+#export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export PATH="$PATH:$(go env GOPATH)/bin"
+export GO111MODULE=""
+export GONOPROXY="github.ibm.com*"
+export GONOSUMDB="github.ibm.com*"
+export GOPRIVATE="github.ibm.com*"
+export GOPROXY="https://proxy.golang.org,direct"
+export GOSUMDB="sum.golang.org"
+export GOMOD=""
+
+
+##
+###   Rust Settings
+##
+export PATH="$PATH:${HOME}/.cargo/bin"
+
+
+##
+###   asdf config
+##
+## from: https://github.com/asdf-vm/asdf
+source "$(brew --prefix asdf)/libexec/asdf.sh"
+#source /usr/local/opt/asdf/asdf.sh
+source "$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash"
+
+
+##
+###   Bash Completion
+##
+## from http://sourabhbajaj.com/mac-setup/BashCompletion/
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+## iTerm2 integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash" || true
+## from https://gist.github.com/phette23/5270658
+if [ $ITERM_SESSION_ID ]; then
+  export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"';
+fi
+## 1Password CLI completion
+source <(op completion bash)
+## direnv CLI hook
+eval "$(direnv hook bash)"
+
+
+##
+###   Kubernetes Helpers
+##
+## load the kube-ps1 brew package, PS1 is set in COLORS section after exporting
+## Intel Mac
+if [[ $(uname -m) == 'x86_64' ]]; then
+  source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+fi
+## Apple Silicon
+if [[ $(uname -m) == 'arm64' ]]; then
+  source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+fi
+
+#custom ICD handling added: https://gist.github.ibm.com/Brady-Paterson/2726d2413735b2c2b9d8d136995f7c25#file-kube-ps1-sh-L342
+## use nano instead of vim
+export KUBE_EDITOR="nano"
+## use krew kubectl plugin
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+
+##
+###   Shortcuts
+##
+## List declared aliases, functions, paths
+alias aliases="alias | sed 's/=.*//'"
+
+## Interactively update global yarn packages (like npm-check)
+alias yarn-check="yarn global upgrade-interactive --latest"
+
+## pretty git log
+alias glog="git log --pretty=oneline --abbrev-commit"
+
+## Source bash_profile
+alias reload="source ~/.bash_profile"
+
+## Load .bashrc if it exists
+test -f ~/.bashrc && source ~/.bashrc
+
+
+##
+###   Colors
+##
+## Change bash prompt to be colorized, rearranges prompt to be: "@username:cwd $ "
+export PS1="@\[\033[36m\]\u\[\033[m\]:\[\033[33;1m\]\W\[\033[m\]\$ "
+## test with ▲ prompt instead of $
+#export PS1="@\[\033[36m\]\u\[\033[m\]:\[\033[33;1m\]\W\[\033[m\]\▲ "
+
+
+## Add k8s helper to PS1
+## "@username:cwd$ (kube-ps1) "
+{{- if eq .chezmoi.hostname "WorkBook" }}
+## machine-specific configuration
+## only display the first portion of the cluster name
+function get_cluster_short() {
+  #echo "$1" | cut -d / -f1 | sed 's/-bastion$//g'
+  # echo "$1" | cut -d / -f1 | sed 's/-bastion-.*//g'
+  echo $CLUSTER_NAME
+  # echo "$1" | cut -d / -f1 | sed 's/.*-bastion-\(.*\)-bastion-.*/\1/g'
+}
+KUBE_PS1_CLUSTER_FUNCTION=get_cluster_short
+{{- end }}
+
+KUBE_PS1_CTX_COLOR='magenta'
+PS1=$PS1'$(kube_ps1) '
+
+
+## colorize help output with bat
+## source: https://github.com/sharkdp/bat
+## ex. 'help icdflow'
+help() {
+    "$@" --help 2>&1 | bat --plain --language=help
+}
+alias bathelp='bat -plhelp --paging=never'
+
+## Enable command line colors, define colors for the 'ls' command
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+
+## Makes reading directory listings easier
+## -G: colorize output, -h: sizes human readable, -F: throws a / after a directory, * after an executable, and a @ after a symlink
+alias ls='ls -GFh'
+
+
+
+{{- if eq .chezmoi.hostname "WorkBook" }}
+## machine-specific configuration
+##
+###   IBM Cloud Databases config
+##
+source `icdctl setup bash`
+## cdcp settings: https://compose.slack.com/archives/CAF1N0UMV/p1571847462121500
+export CDCP_GROUP="crd.compose.com"
+## Shortcut for ibmcloud
+alias ic="ibmcloud"
+alias onc="$HOME/Documents/Workspace/oncall/oc.sh"
+## Enable autocompletion for ibmcloud
+source /usr/local/ibmcloud/autocomplete/bash_autocomplete
+
+##
+###   Ruby config
+##
+## from https://github.com/rbenv/rbenv
+# Load rbenv automatically
+eval "$(rbenv init -)"
+
+##
+###   Shortcuts
+##
+## helper script for daily standup meetings
+alias scrum="$HOME/Documents/Workspace/daily-standup-names/daily-standup-names --names=$HOME/Documents/Workspace/daily-standup-names/team.txt"
+
+## helper script for URL-ifying IBM Cloud CRNs
+alias crnurl="$HOME/Documents/Workspace/crnurl/crnurl.sh"
+
+## helper script to check production service-broker versions
+alias brokerv="$HOME/Documents/Workspace/broker-versions/broker-version.sh"
+
+## helper script for connecting to GPVPN
+alias tvpn="$HOME/Documents/Workspace/tgpvpn-script/tvpn.sh"
+{{- end }}
+
+
+

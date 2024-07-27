@@ -1,0 +1,8 @@
+#!/bin/bash
+## The Brewfile is embedded directly in the script with a bash here document. chezmoi will run this script whenever its contents change, i.e. when you add or remove brews or casks.
+
+{{- if eq .chezmoi.os "darwin" -}}
+
+brew bundle --no-lock --file=Brewfile.tmpl
+
+{{ end -}}

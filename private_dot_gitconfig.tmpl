@@ -23,10 +23,7 @@
 
 {{- if eq .chezmoi.hostname "WorkBook" }}
 # this will only be included in ~/.gitconfig on work-laptop
-[url "git@github.ibm.com:"]
-	insteadOf = https://github.ibm.com/
+[url "git@github.com:"]
+	insteadOf = https://github.com/
 
-[merge "icdflow-baseline-merge"]
-		name = A custom merge driver to handle baseline updates
-		driver = icdflow baseline-merge %O %A %B || git merge-file -L "ours" -L "ancestor" -L "incoming" --marker-size=%L %A %O %B
 {{- end }}

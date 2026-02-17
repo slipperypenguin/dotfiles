@@ -1,27 +1,19 @@
-##############################################################################
 #  bash_profile — managed by chezmoi
-##############################################################################
-#  Sections:
-#    1. Homebrew
-#    2. Languages (Go, Rust)
-#    3. Tools (mise, direnv, 1Password)
-#    4. Completions
-#    5. Kubernetes
-#    6. Aliases
-#    7. Colors & Prompt
-#    8. Machine-Specific ({{ .machine_type }})
-##############################################################################
 
-## ── 1. Homebrew ─────────────────────────────────────────────────────────
+## ─────────────────────────────────────────────────────────────
+###  Homebrew
+##
 {{- if eq .chezmoi.os "darwin" }}
+## Apple Silicon
 if [[ $(uname -m) == 'arm64' ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 {{- end }}
 
 
-## ── 2. Languages ────────────────────────────────────────────────────────
-
+## ─────────────────────────────────────────────────────────────
+###   Language Settings
+##
 ## Go
 export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix go)/libexec"
@@ -38,8 +30,9 @@ export PATH="$PATH:${HOME}/.cargo/bin"
 export PATH="$PATH:$(brew --prefix rustup)/bin"
 
 
-## ── 3. Tools ────────────────────────────────────────────────────────────
-
+## ─────────────────────────────────────────────────────────────
+###   Tools
+##
 ## mise — https://mise.jdx.dev
 eval "$(/opt/homebrew/bin/mise activate bash)"
 
@@ -50,38 +43,49 @@ eval "$(direnv hook bash)"
 source <(op completion bash)
 
 
-## ── 4. Completions ──────────────────────────────────────────────────────
-
+## ─────────────────────────────────────────────────────────────
+###   Completions
+##
+## from http://sourabhbajaj.com/mac-setup/BashCompletion/
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 ## iTerm2 integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash" || true
+## from https://gist.github.com/phette23/5270658
 if [ $ITERM_SESSION_ID ]; then
   export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"';
 fi
 
 
-## ── 5. Kubernetes ───────────────────────────────────────────────────────
-
-## kube-ps1 (PS1 integration is in section 7)
+## ─────────────────────────────────────────────────────────────
+###   Kubernetes
+##
+## kube-ps1 (PS1 integration is in COLORS section)
 if [[ $(uname -m) == 'x86_64' ]]; then
+  ## Intel Mac
   source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 elif [[ $(uname -m) == 'arm64' ]]; then
+  ## Apple Silicon
   source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
 fi
 
 export KUBE_EDITOR="nano"
+## use krew kubectl plugin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 
-## ── 6. Aliases ──────────────────────────────────────────────────────────
-
+## ─────────────────────────────────────────────────────────────
+###   Aliases
+##
 alias aliases="alias | sed 's/=.*//'"
 alias yarn-check="yarn global upgrade-interactive --latest"
 alias glog="git log --pretty=oneline --abbrev-commit"
 alias reload="source ~/.bash_profile"
 alias k="kubectl"
+
+## Makes reading directory listings easier
+## -G: colorize output, -h: sizes human readable, -F: throws a / after a directory, * after an executable, and a @ after a symlink
 alias ls='ls -GFh'
 
 ## chezmoi drift detection
@@ -90,6 +94,8 @@ alias dotstat="chezmoi status"
 alias dotsync="chezmoi git pull -- --autostash --rebase && chezmoi apply -v"
 
 ## colorize help output with bat
+## source: https://github.com/sharkdp/bat
+## ex. 'help kubectl'
 help() {
     "$@" --help 2>&1 | bat --plain --language=help
 }
@@ -102,8 +108,9 @@ test -f ~/.bashrc && source ~/.bashrc
 complete -F __start_kubectl k
 
 
-## ── 7. Colors & Prompt ──────────────────────────────────────────────────
-
+## ─────────────────────────────────────────────────────────────
+###   Colors & Prompt
+##
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
@@ -121,11 +128,16 @@ KUBE_PS1_CTX_COLOR='magenta'
 PS1=$PS1'$(kube_ps1) '
 
 
-## ── 8. Machine-Specific ({{ .machine_type }}) ──────────────────────────
+## ─────────────────────────────────────────────────────────────
+###   Machine-Specific ({{ .machine_type }})
+##
 {{- if eq .machine_type "personal" }}
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias docker="podman"
 {{- else if eq .machine_type "work" }}
+## helper script for daily standup meetings
 alias nextup="~/Documents/GitHub/nextup/target/release/nextup --names $HOME/Documents/GitHub/nextup/team.txt"
+
+## helper script for connecting to GPVPN
 alias tvpn="$HOME/Documents/Workspace/tgpvpn-script/tvpn.sh"
 {{- end }}

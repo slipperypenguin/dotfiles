@@ -153,7 +153,7 @@ mas "SnippetsLab", id: 1006087419
 mas "ToothFairy", id: 1191449274
 mas "Xcode", id: 497799835
 
-{{- if eq .chezmoi.hostname "HackBook-Pro" }}
+{{- if eq .machine_type "personal" }}
 # Personal Specific Packages
 tap "cloudflare/cloudflare"
 tap "dustinblackman/tap"
@@ -211,7 +211,7 @@ mas "The Unarchiver", id: 425424353
 mas "Unsplash Wallpapers", id: 1284863847
 {{- end }}
 
-{{- if eq .chezmoi.hostname "WorkBook" }}
+{{- if eq .machine_type "work" }}
 # Work Specific Packages
 tap "buo/cask-upgrade"
 brew "calicoctl"

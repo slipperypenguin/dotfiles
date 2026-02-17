@@ -21,7 +21,7 @@
 	line-numbers-right-style = cyan
 	line-numbers-zero-style = dim syntax
 
-{{- if eq .chezmoi.hostname "WorkBook" }}
+{{- if eq .machine_type "work" }}
 # this will only be included in ~/.gitconfig on work-laptop
 [url "git@github.com:"]
 	insteadOf = https://github.com/

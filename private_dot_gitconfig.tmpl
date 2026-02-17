@@ -21,6 +21,14 @@
 	line-numbers-right-style = cyan
 	line-numbers-zero-style = dim syntax
 
+{{- if eq .machine_type "personal" }}
+# this is only be included in ~/.gitconfig on personal-laptop
+[credential "https://github.com"]
+        helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+        helper = !/opt/homebrew/bin/gh auth git-credential
+{{- end }}
+
 {{- if eq .machine_type "work" }}
 # this will only be included in ~/.gitconfig on work-laptop
 [url "git@github.com:"]

@@ -1,4 +1,4 @@
-{{- if ne .chezmoi.hostname "WorkBook" }}
+{{- if ne .machine_type "work" }}
 .bashrc  # only manage .bashrc on work laptop
 {{- end }}
 key.txt.age

@@ -1,7 +1,7 @@
 #  bash_profile — managed by chezmoi
 
 ## ─────────────────────────────────────────────────────────────
-###  Homebrew
+###   Homebrew
 ##
 {{- if eq .chezmoi.os "darwin" }}
 ## Apple Silicon
@@ -39,9 +39,6 @@ eval "$(/opt/homebrew/bin/mise activate bash)"
 ## direnv
 eval "$(direnv hook bash)"
 
-## 1Password CLI completion
-source <(op completion bash)
-
 
 ## ─────────────────────────────────────────────────────────────
 ###   Completions
@@ -56,6 +53,9 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 if [ $ITERM_SESSION_ID ]; then
   export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"';
 fi
+
+## 1Password CLI completion
+source <(op completion bash)
 
 
 ## ─────────────────────────────────────────────────────────────

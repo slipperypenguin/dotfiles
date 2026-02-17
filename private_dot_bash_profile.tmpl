@@ -96,6 +96,8 @@ alias k="kubectl"
 ## Load .bashrc if it exists
 test -f ~/.bashrc && source ~/.bashrc
 
+## Extend auto-completion to an alias
+complete -F __start_kubectl k
 
 ##
 ###   Colors
@@ -148,6 +150,8 @@ alias ls='ls -GFh'
 
 ## https://tailscale.com/kb/1080/cli?tab=macos
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+alias docker="podman"
 {{- end }}
 
 

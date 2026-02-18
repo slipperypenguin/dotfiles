@@ -3,10 +3,26 @@
 
 Personal dotfiles for macOS, managed with [chezmoi](https://www.chezmoi.io).
 
+## Prerequisites
+
+1. **Homebrew** — [brew.sh](https://brew.sh)
+2. **1Password + CLI** — install via `brew install 1password 1password-cli`
+3. **Sign in to 1Password** — open the desktop app and authenticate, or run `op signin`
+
+The following 1Password items must exist in the `Personal` vault before first run:
+
+| Item | Type | Fields |
+|------|------|--------|
+| `chezmoi-age-key` | Secure Note | `private-key` — age private key contents |
+| `chezmoi-identity` | Secure Note | `email`, `name`, `signing-key` |
+
 ## Quick Start
 
 ```bash
-# Install chezmoi and apply dotfiles in one command
+# Ensure 1Password CLI is authenticated
+op account get || eval "$(op signin)"
+
+# Install chezmoi and apply dotfiles
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply slipperypenguin
 ```
 
@@ -14,12 +30,10 @@ On first run, chezmoi will prompt for:
 
 | Prompt | Description |
 |--------|-------------|
-| **Email address** | Used in `.gitconfig` |
-| **Git name** | Used in `.gitconfig` |
-| **Git signing-key** | GPG key ID for commit signing |
 | **Machine type** | `personal` or `work` — controls machine-specific packages and config |
+| **1Password account** | Your personal 1Password account (e.g. `my.1password.com`) |
 
-An age passphrase is also required to decrypt the private key used for encrypted files.
+Git identity (email, name, signing key) is pulled automatically from 1Password. The age encryption key is retrieved from 1Password with a fallback to passphrase decryption.
 
 ## What's Managed
 
@@ -33,7 +47,7 @@ An age passphrase is also required to decrypt the private key used for encrypted
 
 | Script | Trigger | Description |
 |--------|---------|-------------|
-| `run_onchange_before_decrypt-private-key` | age key missing or changed | Decrypts the age private key for chezmoi encryption |
+| `run_onchange_before_decrypt-private-key` | age key missing or changed | Retrieves age key from 1Password (falls back to passphrase) |
 | `run_onchange_before_install-packages-darwin` | Brewfile changes | Runs `brew bundle` with the rendered Brewfile |
 
 ## Machine Types
@@ -47,14 +61,14 @@ Templates use a `machine_type` data variable (`personal` or `work`) instead of h
 
 ```
 .
-├── .chezmoi.toml.tmpl                              # chezmoi config template (prompts + data)
+├── .chezmoi.toml.tmpl                              # chezmoi config (1Password + data)
 ├── .chezmoiignore                                  # files to ignore per machine type
 ├── .chezmoitemplates/
 │   └── Brewfile.tmpl                               # Homebrew packages (shared + machine-specific)
-├── key.txt.age                                     # encrypted age private key
+├── key.txt.age                                     # encrypted age private key (fallback)
 ├── private_dot_bash_profile.tmpl                   # ~/.bash_profile
 ├── private_dot_gitconfig.tmpl                      # ~/.gitconfig
-├── run_onchange_before_decrypt-private-key.sh.tmpl # decrypt age key on change
+├── run_onchange_before_decrypt-private-key.sh.tmpl # age key from 1Password / passphrase
 └── run_onchange_before_install-packages-darwin.sh.tmpl  # brew bundle on Brewfile change
 ```
 
@@ -77,6 +91,7 @@ chezmoi add ~/.config/some/config
 
 ## Additional Resources
 * [chezmoi docs](https://www.chezmoi.io)
+* [chezmoi + 1Password](https://www.chezmoi.io/user-guide/password-managers/1password/)
 * [Awesome Dotfiles](https://github.com/webpro/awesome-dotfiles)
 * [Homebrew](https://brew.sh)
 * [Dotfiles community](https://dotfiles.github.io)

@@ -2,7 +2,8 @@
 # Brewfile hash: {{ include ".chezmoitemplates/Brewfile.tmpl" | sha256sum }}
 {{- if eq .chezmoi.os "darwin" }}
 
-brew bundle --no-lock --file=/dev/stdin <<EOF
+# brew bundle check --file=/dev/stdin <<EOF
+brew bundle install --file=/dev/stdin <<EOF
 {{ template "Brewfile.tmpl" . }}
 EOF
 

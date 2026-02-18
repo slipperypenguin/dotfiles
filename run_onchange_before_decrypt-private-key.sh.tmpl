@@ -12,7 +12,7 @@ if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
             eval "$(op signin --account {{ .onepassword_account | quote }})"
         fi
 
-        if op read "op://Personal/chezmoi-age-key/private-key" --account {{ .onepassword_account | quote }} > "${HOME}/.config/chezmoi/key.txt" 2>/dev/null; then
+        if op read "op://CLI/chezmoi-age-key-doc/key.txt" --account {{ .onepassword_account | quote }} > "${HOME}/.config/chezmoi/key.txt" 2>/dev/null; then
             chmod 600 "${HOME}/.config/chezmoi/key.txt"
             echo "age key retrieved from 1Password."
             exit 0

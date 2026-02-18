@@ -11,8 +11,8 @@ encryption = "age"
 [onepassword]
     prompt = true
 [data]
-    email = {{ onepasswordRead "op://Personal/chezmoi-identity/email" $onepassword_account | trim | quote }}
-    git_name = {{ onepasswordRead "op://Personal/chezmoi-identity/name" $onepassword_account | trim | quote }}
-    git_signing_key = {{ onepasswordRead "op://Personal/chezmoi-identity/signing-key" $onepassword_account | trim | quote }}
+    email = {{ onepasswordRead "op://CLI/chezmoi-identity/email" $onepassword_account | trim | quote }}
+    git_name = {{ onepasswordRead "op://CLI/chezmoi-identity/git_name" $onepassword_account | trim | quote }}
+    git_signing_key = {{ onepasswordRead "op://CLI/chezmoi-identity/git_signing_key" $onepassword_account | trim | quote }}
     machine_type = {{ $machine_type | quote }}
     onepassword_account = {{ $onepassword_account | quote }}

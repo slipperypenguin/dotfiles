@@ -16,10 +16,10 @@ Today the repo uses **three mechanisms** for secrets/identity:
 
 ## Decisions
 
-1. **Age key storage format:** Secure Note field (`onepasswordRead` with `op://` URL)
+1. **Age key storage format:** Document type (`onepasswordRead` with `op://` URL)
 2. **Keep `key.txt.age` as fallback:** Yes — the decrypt script tries 1Password first, falls back to passphrase
-3. **1Password items:** Two items — `chezmoi-age-key` and `chezmoi-identity`
-4. **Multi-account:** Personal and work are separate 1Password accounts. All chezmoi secrets live in the **personal** account. A `onepassword_account` data variable is prompted at init so `onepasswordRead` always targets the correct account regardless of which machine you're on.
+3. **1Password items:** Two items in `CLI` vault — `chezmoi-age-key-doc` (Document) and `chezmoi-identity` (Password)
+4. **Multi-account:** Personal and work are separate 1Password accounts. All chezmoi secrets live in the personal 1Password account's `CLI` vault. A `onepassword_account` data variable is prompted at init so `onepasswordRead` always targets the correct account regardless of which machine you're on.
 
 ---
 
@@ -30,8 +30,8 @@ Today the repo uses **three mechanisms** for secrets/identity:
 **Why:** Eliminates the separate passphrase. On a new machine, if you're signed into 1Password, chezmoi bootstraps automatically.
 
 **How:**
-1. Create a 1Password Secure Note in vault `Personal`, item `chezmoi-age-key`, field `private-key`
-   - `op://Personal/chezmoi-age-key/private-key`
+1. Create a 1Password Document in vault `CLI`, item `chezmoi-age-key-doc`, file `key.txt`
+   - `op://CLI/chezmoi-age-key-doc/key.txt`
 2. Update `run_onchange_before_decrypt-private-key.sh.tmpl` to try 1Password first, fall back to passphrase
 3. Keep `key.txt.age` in repo as fallback
 
@@ -42,8 +42,8 @@ Today the repo uses **three mechanisms** for secrets/identity:
 **Why:** Eliminates manual typing of email, name, and signing key at init.
 
 **How:**
-1. Create a 1Password Secure Note in vault `Personal`, item `chezmoi-identity`
-   - Fields: `email`, `name`, `signing-key`
+1. Create a 1Password Password item in vault `CLI`, item `chezmoi-identity`
+   - Fields: `email`, `git_name`, `git_signing_key`
 2. Update `.chezmoi.toml.tmpl` to use `onepasswordRead` with account parameter
 3. Add `[onepassword]` config section with `prompt = true`
 4. Add `onepassword_account` as a `promptStringOnce` so the user enters their personal 1Password account identifier once
@@ -58,19 +58,19 @@ Add prerequisites section documenting the 1Password bootstrap requirement.
 
 ## 1Password Items to Create (manual step)
 
-### Item 1: `chezmoi-age-key`
-- **Vault:** Personal
-- **Type:** Secure Note
+### Item 1: `chezmoi-age-key-doc`
+- **Vault:** CLI
+- **Type:** Document
 - **Fields:**
-  - `private-key` — full contents of `~/.config/chezmoi/key.txt`
+  - `key.txt` — age private key file (contents of `~/.config/chezmoi/key.txt`)
 
 ### Item 2: `chezmoi-identity`
-- **Vault:** Personal
-- **Type:** Secure Note
+- **Vault:** CLI
+- **Type:** Password
 - **Fields:**
   - `email` — git email address
-  - `name` — git display name
-  - `signing-key` — GPG signing key ID
+  - `git_name` — git display name
+  - `git_signing_key` — GPG signing key ID
 
 ---
 

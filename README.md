@@ -9,12 +9,12 @@ Personal dotfiles for macOS, managed with [chezmoi](https://www.chezmoi.io).
 2. **1Password + CLI** — install via `brew install 1password 1password-cli`
 3. **Sign in to 1Password** — open the desktop app and authenticate, or run `op signin`
 
-The following 1Password items must exist in the `Personal` vault before first run:
+The following 1Password items must exist in the `CLI` vault before first run:
 
 | Item | Type | Fields |
 |------|------|--------|
-| `chezmoi-age-key` | Secure Note | `private-key` — age private key contents |
-| `chezmoi-identity` | Secure Note | `email`, `name`, `signing-key` |
+| `chezmoi-age-key-doc` | Document | `key.txt` — age private key file |
+| `chezmoi-identity` | Password | `email`, `git_name`, `git_signing_key` |
 
 ## Quick Start
 

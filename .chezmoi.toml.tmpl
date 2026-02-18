@@ -1,7 +1,5 @@
-{{- $email := promptStringOnce . "email" "Email address" -}}
-{{- $git_name := promptStringOnce . "git_name" "Git name" -}}
-{{- $git_signing_key := promptStringOnce . "git_signing_key" "Git signing-key" -}}
 {{- $machine_type := promptChoiceOnce . "machine_type" "Machine type" (list "personal" "work") -}}
+{{- $onepassword_account := promptStringOnce . "onepassword_account" "1Password account (e.g. my.1password.com)" -}}
 encryption = "age"
 [age]
     identity = "~/.config/chezmoi/key.txt"
@@ -10,8 +8,11 @@ encryption = "age"
     command = "nano"
 [diff]
     pager = "delta"
+[onepassword]
+    prompt = true
 [data]
-    email = {{ $email | quote }}
-    git_name = {{ $git_name | quote }}
-    git_signing_key = {{ $git_signing_key | quote }}
+    email = {{ onepasswordRead "op://CLI/chezmoi-identity/email" $onepassword_account | trim | quote }}
+    git_name = {{ onepasswordRead "op://CLI/chezmoi-identity/git_name" $onepassword_account | trim | quote }}
+    git_signing_key = {{ onepasswordRead "op://CLI/chezmoi-identity/git_signing_key" $onepassword_account | trim | quote }}
     machine_type = {{ $machine_type | quote }}
+    onepassword_account = {{ $onepassword_account | quote }}

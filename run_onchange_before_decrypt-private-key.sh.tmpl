@@ -1,7 +1,26 @@
 #!/bin/sh
+# age key source: 1password (fallback: key.txt.age passphrase)
 
 if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
     mkdir -p "${HOME}/.config/chezmoi"
+
+    # Try 1Password first
+    if command -v op >/dev/null 2>&1; then
+        # Prompt sign-in if not authenticated
+        if ! op account get --account {{ .onepassword_account | quote }} >/dev/null 2>&1; then
+            echo "1Password: not signed in. Run 'op signin' or unlock the 1Password desktop app."
+            eval "$(op signin --account {{ .onepassword_account | quote }})"
+        fi
+
+        if op read "op://CLI/chezmoi-age-key-doc/key.txt" --account {{ .onepassword_account | quote }} > "${HOME}/.config/chezmoi/key.txt" 2>/dev/null; then
+            chmod 600 "${HOME}/.config/chezmoi/key.txt"
+            echo "age key retrieved from 1Password."
+            exit 0
+        fi
+        echo "1Password: failed to retrieve age key, falling back to passphrase..."
+    fi
+
+    # Fallback: decrypt from repo
     chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/key.txt.age"
     chmod 600 "${HOME}/.config/chezmoi/key.txt"
 fi
